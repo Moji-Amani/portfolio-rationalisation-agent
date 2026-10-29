@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Generated agent output (memo + log)
+out/
+
+# Editor / OS noise
+.DS_Store
+*.swp
+
+# Note: the answer key lives OUTSIDE this project by design (see README §4).
+# It is never committed here and the agent never reads it.

@@ -1,0 +1,15 @@
+requirement_id,text,priority,threshold,owner
+R001,Network performance monitoring across core and RAN,Must,>=99.5% element coverage at 5-minute granularity,Network Ops Lead
+R002,Incident management with SLA tracking,Must,P1 acknowledged within 15 minutes for >=98% of incidents,Service Management Lead
+R003,Backup of network configuration and OSS data,Must,RPO <=4 hours; retention >=90 days,Infrastructure Lead
+R004,Customer-facing ticket logging,Should,>=90% of customer tickets logged without agent help,Customer Service Lead
+R005,Accurate network inventory,Must,>=98% inventory accuracy against audit sample,Inventory Lead
+R006,24x7 security event monitoring,Should,Mean time to detect <1 hour,Security Lead
+R007,Closed-loop remediation for top fault types,Must,>=60% of top-20 fault types auto-resolved,Orchestration Lead
+R008,Privileged access control for admin accounts,Must,100% of admin accounts under managed access,Security Lead
+R009,Operational KPI reporting,Should,Daily refresh by 07:00,Data Lead
+R010,ML model deployment for assurance use cases,Could,>=3 models in production,Data Science Lead
+R011,Disaster recovery for OSS platforms,Should,RTO <=8 hours,Infrastructure Lead
+R012,Change management with audit trail,Must,100% of changes logged with approval record,Service Management Lead
+R013,Vulnerability scanning of exposed assets,Should,Weekly scan of 100% of internet-facing assets,Security Lead
+R014,Data catalogue for OSS datasets,Could,>=80% of OSS datasets catalogued,Data Lead
