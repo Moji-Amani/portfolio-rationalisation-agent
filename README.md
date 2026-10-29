@@ -1,5 +1,6 @@
 # Portfolio rationalisation agent
 * This version is deterministic core, and the next version adds a Gemini layer via Google ADK*
+  
 An agent that analyses a software/tooling estate against business requirements
 and recommends which tools to **keep, merge, or retire** — with guardrails that
 stop it overclaiming or acting on its own. Every figure is a range with stated
