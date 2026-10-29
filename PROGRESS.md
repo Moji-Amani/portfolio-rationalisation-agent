@@ -82,9 +82,10 @@ The guardrails (from `.kiro/steering/rules.md`) are the heart of the exercise:
 
 > The `answer_key/` folder lives **outside** this project by design. The agent
 > and its code must never read it. It is only used by the (separate) evaluation
-> script in step 9. In this setup the key is kept in a separate folder entirely —
-> `~/New folder/answer_key/answer_key.json` — which satisfies "outside the
-> project". Run eval with `--answer-key` to point at it on another machine.
+> script in step 9. It is kept at the `generate.py` default location —
+> `…/Portfolio Rationalisation Agent/answer_key/answer_key.json` — outside
+> `portfolio-agent/`. `eval/evaluate.py` finds it with no flag; use
+> `--answer-key` only if it moves.
 
 ---
 

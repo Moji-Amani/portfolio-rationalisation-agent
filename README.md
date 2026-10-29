@@ -111,13 +111,13 @@ python3 eval/evaluate.py --answer-key /path/to/answer_key.json
 ```
 
 > **Note on the answer key.** By design the key lives **outside** this project so
-> the agent can never read it (steering rule). `generate.py`'s default location is
-> the project-parent `answer_key/`; in this setup the key was placed in a separate
-> folder entirely (`~/New folder/answer_key/answer_key.json`), which is an equally
-> valid "outside" location. `eval/evaluate.py` locates it via: explicit
-> `--answer-key PATH` → the `generate.py` default → the separate-folder fallback.
-> On a fresh machine, pass `--answer-key` to point at wherever the key is. The
-> agent package never reads it; only `eval/evaluate.py` does.
+> the agent can never read it (steering rule). It is at the `generate.py` default
+> location — the project-parent `answer_key/`
+> (`…/Portfolio Rationalisation Agent/answer_key/answer_key.json`) — which is
+> outside `portfolio-agent/` but discoverable by the evaluator. `eval/evaluate.py`
+> finds it automatically, so `python3 eval/evaluate.py` runs with no flag; pass
+> `--answer-key PATH` only if the key is elsewhere. The agent package never reads
+> it; only `eval/evaluate.py` does.
 
 ---
 

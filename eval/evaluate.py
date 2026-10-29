@@ -44,8 +44,8 @@ CORRECT, PARTLY, WRONG = "correct", "partly", "wrong"
 
 # Candidate locations for the answer key (spec location first, then fallbacks).
 _KEY_CANDIDATES = [
-    PROJECT.parent / "answer_key" / "answer_key.json",          # generate.py KEY_DIR
-    Path.home() / "New folder" / "answer_key" / "answer_key.json",
+    PROJECT.parent / "answer_key" / "answer_key.json",          # generate.py KEY_DIR (canonical)
+    Path.home() / "New folder" / "answer_key" / "answer_key.json",  # legacy/alternative location
 ]
 
 

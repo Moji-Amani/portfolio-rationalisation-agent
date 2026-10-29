@@ -229,6 +229,10 @@ setup, so the key ended up detached from the project.
 **Fix:** `find_answer_key()` takes an explicit `--answer-key` path and otherwise
 tries the spec location then the known alternative. No path is hard-coded into
 scoring; the harness just needs to *locate* the file, then reads it at run time.
+**Resolved:** the key was subsequently moved to the canonical `generate.py`
+location (`…/Portfolio Rationalisation Agent/answer_key/answer_key.json`, outside
+`portfolio-agent/`), so `python3 eval/evaluate.py` now runs with no `--answer-key`
+flag. The configurable path + fallbacks remain for portability.
 
 ### Challenge 9.2 — honouring "never read the answer key" without being unable to score
 **What happened:** the agent (and I) must never read the key, yet the evaluation
