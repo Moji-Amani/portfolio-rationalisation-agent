@@ -1,13 +1,45 @@
 # Portfolio rationalisation agent
-* This version is deterministic core, and the next version adds a Gemini layer via Google ADK*
-  
+
+**Outcome:** turns a tooling estate into safe, evidence-backed keep / merge / retire decisions, with savings as ranges and a human sign-off before anything is final.
+
+**Designed by Mojdeh Amani** (agent design, guardrails and evaluation). Built with Kiro.
+*v1 is a deterministic, fully tested core; v2 adds a Gemini layer through Google ADK.*
+
 An agent that analyses a software/tooling estate against business requirements
 and recommends which tools to **keep, merge, or retire** — with guardrails that
 stop it overclaiming or acting on its own. Every figure is a range with stated
 assumptions, every recommendation cites its evidence, and nothing is finalised
-without a human approval gate.  
+without a human approval gate.
 
 Reference date for the scenario: **2026-10-27**. Data is synthetic.
+
+### What it produces
+
+Output of `python3 demo.py`: the agent stops at the approval gate with these recommendations (excerpt).
+
+```text
+Summary: 1 merge, 1 do_not_renew, 1 procure, 1 needs_human_review, 32 keep
+
+[MERGE] T001 PulseWatch Enterprise  (confidence: high; Two-Way Door)
+    savings (low/base/high): £23,000 / £94,000 / £146,000
+    cited tools: T001, T002
+    - Overlaps with SignalScope (T002) on capability 'monitoring/network-performance'; redundancy score 0.82.
+    - Its requirements are also covered by SignalScope, so merging loses no unique coverage.
+    blast radius: Users of PulseWatch Enterprise migrate to SignalScope
+
+[PROCURE] T028 Sentinel Vault PAM  (confidence: high; Two-Way Door)
+    savings (low/base/high): £12,000 / £15,000 / £16,500
+    - 260 active users exceed 200 licences (shortfall of 60).
+    - Supports Must requirement(s) R008.
+
+[NEEDS_HUMAN_REVIEW] T019 InsightBox  (confidence: low; Two-Way Door)
+    - Zero active users.
+    ! No owner recorded; identify an owner before any action.
+
+approve / edit / reject >
+```
+
+After approval it writes a one-page decision memo (`memo.md`) and a step-by-step tool-call log (`tool_call_log.md`).
 
 ---
 
@@ -95,7 +127,7 @@ orphan, claimed-only, under-provisioned). The expected answers live in an
 
 ```bash
 # From the project root.
-cd "portfolio-agent"
+cd portfolio-rationalisation-agent
 
 # Unit tests (standard library only; no pytest needed).
 python3 -m unittest discover -s tests          # 90 tests
@@ -114,9 +146,8 @@ python3 eval/evaluate.py        # no flag needed; key is at the default location
 
 > **Note on the answer key.** By design the key lives **outside** this project so
 > the agent can never read it (steering rule). It is at the `generate.py` default
-> location — the project-parent `answer_key/`
-> (`…/Portfolio Rationalisation Agent/answer_key/answer_key.json`) — which is
-> outside `portfolio-agent/` but discoverable by the evaluator. `eval/evaluate.py`
+> location — `answer_key/answer_key.json` in the folder above the project — which is
+> outside the project folder but discoverable by the evaluator. `eval/evaluate.py`
 > finds it automatically, so `python3 eval/evaluate.py` runs with no flag; pass
 > `--answer-key PATH` only if the key is elsewhere. The agent package never reads
 > it; only `eval/evaluate.py` does.
@@ -192,7 +223,7 @@ Recorded in full in `challenges.md`; the ones worth surfacing here:
 ## 8. Project layout
 
 ```
-portfolio-agent/
+portfolio-rationalisation-agent/
 ├── .kiro/                     # spec (tasks.md) and steering (rules.md)
 ├── data/                      # synthetic inventory, requirements, taxonomy, generator
 ├── src/portfolio_agent/       # the agent package (steps 1–8)
