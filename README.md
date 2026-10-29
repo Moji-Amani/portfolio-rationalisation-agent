@@ -1,10 +1,10 @@
 # Portfolio rationalisation agent
-
+* This version is deterministic core, and the next version adds a Gemini layer via Google ADK*
 An agent that analyses a software/tooling estate against business requirements
 and recommends which tools to **keep, merge, or retire** — with guardrails that
 stop it overclaiming or acting on its own. Every figure is a range with stated
 assumptions, every recommendation cites its evidence, and nothing is finalised
-without a human approval gate.
+without a human approval gate.  
 
 Reference date for the scenario: **2026-10-27**. Data is synthetic.
 
@@ -212,5 +212,4 @@ portfolio-agent/
 
 ## 9. Licence
 
-MIT — see [`LICENSE`](LICENSE). Edit the copyright line to your name before
-publishing.
+MIT — see [`LICENSE`](LICENSE). 
