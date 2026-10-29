@@ -376,11 +376,10 @@ plus a doc:
   drawing on `challenges.md` and the safety section of `DECISIONS.md`.
 
 Answer-key location problem (discovered up front): `generate.py` writes the key
-to `ROOT.parent.parent/answer_key` (the project parent), but there is no key
-there — the only copy is at `/home/moji/New folder/answer_key/answer_key.json`,
-left over from the earlier data zip. Plan: make the eval script's answer-key path
-a parameter with sensible fallbacks (the spec location first, then known
-alternatives), so it finds the key wherever it is without me opening it. I will
+to `ROOT.parent.parent/answer_key` (the project parent), but at first there was
+no key there — the only copy was in a leftover folder from the earlier data zip.
+Plan: make the eval script's answer-key path a parameter with a sensible default
+(the spec location), so it finds the key without me opening it. I will
 **not** read the key's contents myself; the script reads it at run time and the
 score is computed in code.
 
@@ -390,10 +389,10 @@ read the key. Scores must be computed from the key, not hard-coded.
 
 **Outcome (after):**
 Built `eval/evaluate.py` as a standalone harness outside the `portfolio_agent`
-package. `find_answer_key(explicit)` tries an explicit `--answer-key` path, then
-falls back to the spec location and the known alternative; the key was actually
-at `~/New folder/answer_key/answer_key.json` (not the project-parent location
-`generate.py` expects), and the fallback found it. `score_case` grades each
+package. `find_answer_key(explicit)` uses an explicit `--answer-key` path if
+given, otherwise the `generate.py` spec location (project-parent `answer_key/`),
+where the key is now kept — so `python3 eval/evaluate.py` runs with no flag.
+`score_case` grades each
 planted case correct/partly/wrong on decision, door type, cited coverage and the
 savings range (compared to the key's `reference_*_gbp`); `run_messy_eval`
 confirms the blocking duplicate plus the six reported faults (checking T025's

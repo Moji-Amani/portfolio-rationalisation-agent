@@ -523,9 +523,8 @@ under `src/`.
 Public API (in `eval/evaluate.py`):
 
 - `find_answer_key(explicit)` — uses an explicit `--answer-key` path if given,
-  else tries the `generate.py` spec location (project-parent `answer_key/`) then
-  the known alternative (`~/New folder/answer_key/answer_key.json`). It only
-  *locates* the file; scoring is never hard-coded.
+  else uses the `generate.py` spec location (project-parent `answer_key/`, where
+  the key is kept). It only *locates* the file; scoring is never hard-coded.
 - `score_case(case, recs_by_id) -> (grade, note)` — grades a planted case
   `correct` / `partly` / `wrong` on structured facts: decision family, door type,
   cited coverage, and the savings range vs the key's `reference_*_gbp`

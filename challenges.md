@@ -222,17 +222,17 @@ footer states the agent only reads inputs and writes the memo + log.
 
 ### Challenge 9.1 — the answer key wasn't where the spec says
 **What happened:** `generate.py` writes the key to the project-parent
-`answer_key/`, but no key existed there; the only copy was in a leftover folder
-(`~/New folder/answer_key/answer_key.json`) from the earlier data zip.
+`answer_key/`, but at first no key existed there; the only copy was in a leftover
+folder from the earlier data zip.
 **Root cause:** the data and key zips were extracted/moved separately during
 setup, so the key ended up detached from the project.
 **Fix:** `find_answer_key()` takes an explicit `--answer-key` path and otherwise
-tries the spec location then the known alternative. No path is hard-coded into
-scoring; the harness just needs to *locate* the file, then reads it at run time.
-**Resolved:** the key was subsequently moved to the canonical `generate.py`
-location (`…/Portfolio Rationalisation Agent/answer_key/answer_key.json`, outside
+uses the spec location. No path is hard-coded into scoring; the harness just
+needs to *locate* the file, then reads it at run time.
+**Resolved:** the key was moved to the canonical `generate.py` location
+(`…/Portfolio Rationalisation Agent/answer_key/answer_key.json`, outside
 `portfolio-agent/`), so `python3 eval/evaluate.py` now runs with no `--answer-key`
-flag. The configurable path + fallbacks remain for portability.
+flag.
 
 ### Challenge 9.2 — honouring "never read the answer key" without being unable to score
 **What happened:** the agent (and I) must never read the key, yet the evaluation
