@@ -99,15 +99,16 @@ cd "portfolio-agent"
 # Unit tests (standard library only; no pytest needed).
 python3 -m unittest discover -s tests          # 90 tests
 
-# End-to-end run (prints the approval summary; type approve/edit/reject).
-python3 -c "import sys; sys.path.insert(0,'src'); \
-from portfolio_agent.report import run_agent, write_artifacts; \
-import datetime; \
-r=run_agent('data/inventory.csv','data/requirements.csv', reference_date=datetime.date(2026,10,27)); \
-print(write_artifacts(r, 'out'))"
+# Demo — full agent run; writes memo.md + tool_call_log.md to ./demo_out.
+python3 demo.py                 # interactive: the approval gate prompts you
+python3 demo.py --approve       # non-interactive: auto-approve (for recordings)
+python3 demo.py --reject        # non-interactive: auto-reject
+
+# Same demo, run as a package (needs src/ on the path):
+PYTHONPATH=src python3 -m portfolio_agent --approve
 
 # Evaluation (separate from the agent; it may read the answer key).
-python3 eval/evaluate.py --answer-key /path/to/answer_key.json
+python3 eval/evaluate.py        # no flag needed; key is at the default location
 ```
 
 > **Note on the answer key.** By design the key lives **outside** this project so
@@ -196,8 +197,20 @@ portfolio-agent/
 ├── src/portfolio_agent/       # the agent package (steps 1–8)
 ├── tests/                     # unit tests (stdlib unittest)
 ├── eval/evaluate.py           # evaluation harness (separate from the agent)
+├── demo.py                    # one-command demo entry point
 ├── PROGRESS.md                # current state / handover
 ├── DECISIONS.md               # per-task reasoning + safety decisions
 ├── challenges.md              # problems hit and how they were fixed
+├── LICENSE                    # MIT
 └── README.md                  # this file
 ```
+
+(The package is also runnable as `python3 -m portfolio_agent` via
+`src/portfolio_agent/__main__.py`.)
+
+---
+
+## 9. Licence
+
+MIT — see [`LICENSE`](LICENSE). Edit the copyright line to your name before
+publishing.
